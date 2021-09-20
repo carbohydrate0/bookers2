@@ -25,9 +25,9 @@
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
             <% if user_signed_in? %>
-              <%= link_to ' Home', book_index_path(current_user.id), class: 'fas fa-home nav-link text-white' %>
-              <%= link_to ' Users', user_path(current_user.id), class: 'fas fa-users nav-link text-white' %>
-              <%= link_to ' Books', book_path(current_user.id), class: 'fas fa-book nav-link text-white' %>
+              <%= link_to ' Home', user_path(current_user.id), class: 'fas fa-home nav-link text-white' %>
+              <%= link_to ' Users', users_path(current_user.id), class: 'fas fa-users nav-link text-white' %>
+              <%= link_to ' Books', book_index_path(current_user.id), class: 'fas fa-book nav-link text-white' %>
               <%= link_to ' logout', destroy_user_session_path, method: :delete, class: 'fas fa-sign-out-alt nav-link text-white' %>
             <% else %>
               <%= link_to ' Home', root_path, class: 'fas fa-home nav-link text-white' %>
@@ -41,7 +41,10 @@
       </nav>
     </header>
     <main class="mb-auto">
-    <%= yield %>
+      <% flash.each do |key, value| %>
+        <%= content_tag(:div, value, class: "#{key}") %>
+      <% end %>
+      <%= yield %>
     </main>
     <footer class="bg-white text-dark pt-5 pb-4">
       <div class="container">
