@@ -8,29 +8,30 @@ class BookController < ApplicationController
     @book = Book.new
     @books = current_user.book
     @user = current_user
-    # @user_book = 
+    # @user_book =
   end
-  
+
   def create
     @book = Book.new(book_params)
     @book.user_id = current_user.id
     @book.save
     redirect_to book_detail_path
   end
-  
+
   def edit
     @book = Book.find(params[:id])
   end
 
   def show
+    @books = Book.all
+    @booknew = Book.new
+  end
+
+  def detail
+    @booknew = Book.new
     @book = Book.find(params[:id])
   end
-  
-  def detail
-    @user = current_user
-    @books = current_user.book
-  end
-  
+
   def update
     book = Book.find(params[:id])
     book.update(book_params)
@@ -42,8 +43,8 @@ class BookController < ApplicationController
     book.destroy
     redirect_to book_detail_path
   end
-  
-  
+
+
   private
 
   def book_params
