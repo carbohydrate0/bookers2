@@ -1,7 +1,7 @@
 class BooksController < ApplicationController
   before_action :baria_user, only: [:edit, :destroy, :update]
 
-  
+
   def new
     @book = Book.new
   end
@@ -32,6 +32,7 @@ class BooksController < ApplicationController
     @booknew = Book.new
     @book = Book.find(params[:id])
     @user = User.find(@book.user_id)
+    @book_comment = BookComment.new
   end
 
   def update

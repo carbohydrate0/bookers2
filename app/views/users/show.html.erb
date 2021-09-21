@@ -23,6 +23,27 @@
                 </td>
                 <td><%= link_to book.title, book_path(book) %></td>
                 <td><%= book.body %></td>
+                <% if book.favorited_by?(current_user) %>
+                  <p>
+                    <td>
+                      <%= link_to book_favorites_path(book), method: :delete do %>
+                        <p class="text-danger">
+                          <i class="fas fa-heart"></i><%= book.favorites.count %>
+                        </p>
+                      <% end %>
+                    </td>
+                  </p>
+                  <% else %>
+                  <p>
+                    <td>
+                      <%= link_to book_favorites_path(book), method: :post do %>
+                        <p class="text-primary">
+                          <i class="fas fa-heart"></i><%= book.favorites.count %>
+                        </p>
+                      <% end %>
+                    </td>
+                  </p>
+                <% end %>
               </tr>
             <% end %>
           </tbody>
