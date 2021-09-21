@@ -2,8 +2,8 @@ class BookController < ApplicationController
   before_action :baria_user, only: [:edit, :destroy, :update]
   before_action :ensure_current_book, {only: [:edit, :update]}
   def ensure_current_book
-    if @current_user.id != params[:id].to_i
-      redirect_to("/book/index")
+    if current_user.id != params[:id].to_i
+      redirect_to("/books")
     end
   end
   

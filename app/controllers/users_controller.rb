@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
   before_action :ensure_current_user, {only: [:edit, :update]}
   def ensure_current_user
-    if @current_user.id != params[:id].to_i
-      redirect_to("/book/index")
+    if current_user.id != params[:id].to_i
+      redirect_to("/books")
     end
   end
   
@@ -15,19 +15,18 @@ class UsersController < ApplicationController
   def show
     @book = Book.new
     @user = User.find(params[:id])
-    @books = @user.book
+    @books = @user.books
 
   end
   def edit
-    # @user = User.find(params[:id])
-    @user = current_user
+    @user = User.find(params[:id])
   end
 
   def update
     # @user = User.find(params[:id])
     @user = current_user
     if @user.update(user_params)
-      redirect_to book_index_path(@user.id), notice: 'User was successfully updated!'
+      redirect_to user_path(@user.id), notice: 'User was successfully updated!'
     else
       render :edit
     end

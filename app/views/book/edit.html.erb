@@ -5,7 +5,7 @@
   </div>
     <li class="m-2 text-danger"><%= message %></li>
   <% end %>
-<% end %><h1>book/index</h1>
+<% end %>
 <div class="container">
   <div class="row">
     <div class="mx-auto col-11 col-sm-10 col-lg-8 col-xl-6">
@@ -24,9 +24,9 @@
       <% end %>
       
       
-      <%= link_to "Show", book_path %>
+      <%= link_to "Show", book_path(@book) %>
       |
-      <%= link_to "Back", book_index_path %>
+      <%= link_to "Back", books_path %>
         
     </div>
   </div>
